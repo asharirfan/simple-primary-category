@@ -25,3 +25,13 @@ if ( ! defined( 'SPC_PLUGIN_FILE' ) ) {
 if ( ! class_exists( 'Simple_Primary_Category' ) ) {
 	include_once dirname( __FILE__ ) . '/includes/class-simple-primary-category.php';
 }
+
+/**
+ * Main Plugin Instance.
+ *
+ * @return Simple_Primary_Category
+ */
+function wpspc() {
+	return Simple_Primary_Category::instance();
+}
+wpspc();
