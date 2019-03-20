@@ -15,3 +15,13 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
+
+// Define plugin file.
+if ( ! defined( 'SPC_PLUGIN_FILE' ) ) {
+	define( 'SPC_PLUGIN_FILE', __FILE__ );
+}
+
+// Include SPC main class file.
+if ( ! class_exists( 'Simple_Primary_Category' ) ) {
+	include_once dirname( __FILE__ ) . '/includes/class-simple-primary-category.php';
+}
