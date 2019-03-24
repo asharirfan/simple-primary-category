@@ -38,7 +38,7 @@ class SPC_Primary_Term_Query {
 		);
 
 		if ( '' === $taxonomy ) {
-			$wp_term  = get_term( $term );
+			$wp_term  = get_term( $term_id );
 			$taxonomy = ( ! is_wp_error( $wp_term ) && ! is_null( $wp_term ) ) ? $wp_term->taxonomy : '';
 		}
 
