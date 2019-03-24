@@ -161,6 +161,8 @@ class SPC_Admin {
 			}
 		}
 
+		wp_cache_set( 'spc_post_taxonomies_' . $post_id, $taxonomies, 'spc' );
+
 		return $taxonomies;
 	}
 
