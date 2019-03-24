@@ -46,11 +46,14 @@ class SPC_Admin {
 			return;
 		}
 
+		$suffix  = ( defined( 'WP_DEBUG' ) && WP_DEBUG ) ? '' : '.min';
+		$version = ( defined( 'WP_DEBUG' ) && WP_DEBUG ) ? filemtime( SPC_BASE_DIR . 'assets/js/spc-taxonomy.js' ) : SPC_VERSION;
+
 		wp_register_script(
 			'spc-taxonomy',
-			SPC_BASE_URL . 'assets/js/spc-taxonomy.js',
+			SPC_BASE_URL . 'assets/js/spc-taxonomy' . $suffix . '.js',
 			array( 'jquery' ),
-			filemtime( SPC_BASE_DIR . 'assets/js/spc-taxonomy.js' ),
+			$version,
 			true
 		);
 		wp_enqueue_script( 'spc-taxonomy' );
