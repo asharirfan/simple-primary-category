@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Main Plugin Class.
  */
-class Simple_Primary_Category {
+final class Simple_Primary_Category {
 
 	/**
 	 * SPC Version.
@@ -61,6 +61,7 @@ class Simple_Primary_Category {
 		$this->define( 'SPC_BASE_URL', trailingslashit( plugin_dir_url( SPC_PLUGIN_FILE ) ) );
 		$this->define( 'SPC_BASE_DIR', trailingslashit( plugin_dir_path( SPC_PLUGIN_FILE ) ) );
 	}
+
 	/**
 	 * Define constant if not defined already.
 	 *
@@ -76,5 +77,30 @@ class Simple_Primary_Category {
 	/**
 	 * Include plugin files.
 	 */
-	public function includes() {}
+	public function includes() {
+		require_once dirname( __FILE__ ) . '/class-spc-primary-term.php';
+		require_once dirname( __FILE__ ) . '/class-spc-primary-term-query.php';
+		require_once dirname( __FILE__ ) . '/spc-functions.php';
+
+		if ( is_admin() ) {
+			require_once dirname( __FILE__ ) . '/admin/class-spc-admin.php';
+		}
+	}
+
+	/**
+	 * Error Logger
+	 *
+	 * Logs given input into debug.log file in debug mode.
+	 *
+	 * @param mixed $message - Error message.
+	 */
+	public function error_log( $message ) {
+		if ( WP_DEBUG === true ) {
+			if ( is_array( $message ) || is_object( $message ) ) {
+				error_log( print_r( $message, true ) );
+			} else {
+				error_log( $message );
+			}
+		}
+	}
 }
