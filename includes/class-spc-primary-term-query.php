@@ -19,18 +19,17 @@ class SPC_Primary_Term_Query {
 	 *
 	 * Performs a query to return posts by term.
 	 *
-	 * @param integer|string $term - Term id, slug or name.
-	 * @param array          $args - Post query arguments.
+	 * @param integer|string $term     - Term id, slug or name.
+	 * @param string         $taxonomy - Taxonomy slug.
+	 * @param array          $args     - Post query arguments.
 	 * @return array|false|WP_Error
 	 */
-	public static function get_posts_by_primary_term( $term, $args = array() ) {
-		$term_id = self::get_term_id( $term );
+	public static function get_posts_by_primary_term( $term, $taxonomy = '', $args = array() ) {
+		$term_id = self::get_term_id( $term, $taxonomy );
 
 		if ( ! $term_id ) {
 			return new WP_Error( 'noterm', __( 'Term does not exist.', 'simple-primary-category' ) );
 		}
-
-		$term = get_term( $term_id );
 
 		$query_defaults = array(
 			'post_type'      => 'post',
@@ -38,8 +37,13 @@ class SPC_Primary_Term_Query {
 			'posts_per_page' => 10,
 		);
 
+		if ( '' === $taxonomy ) {
+			$wp_term  = get_term( $term );
+			$taxonomy = ( ! is_wp_error( $wp_term ) && ! is_null( $wp_term ) ) ? $wp_term->taxonomy : '';
+		}
+
 		$meta_query = array(
-			'key'   => 'spc_primary_' . $term->taxonomy,
+			'key'   => 'spc_primary_' . $taxonomy,
 			'value' => $term_id,
 		);
 
@@ -57,10 +61,18 @@ class SPC_Primary_Term_Query {
 	/**
 	 * Returns term id by checking if it exists.
 	 *
-	 * @param integer|string $term - Term id, slug or name.
+	 * @param integer|string $term     - Term id, slug or name.
+	 * @param string         $taxonomy - Taxonomy slug.
 	 * @return integer
 	 */
-	public static function get_term_id( $term ) {
-		return term_exists( $term );
+	public static function get_term_id( $term, $taxonomy ) {
+		$term_id = wp_cache_get( 'spc_term_exists_' . $term . '_' . $taxonomy, 'spc' );
+
+		if ( false === $term_id ) {
+			$term_id = term_exists( $term );
+			wp_cache_set( 'spc_term_exists_' . $term . '_' . $taxonomy, $term_id, 'spc' );
+		}
+
+		return $term_id;
 	}
 }
