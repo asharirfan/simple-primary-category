@@ -33,4 +33,4 @@
 ![image](.github/simple-primary-category.jpg)
 
 ## ©️ License & Attribution
-GPL2+ ©️ [Ashar Irfan](https://asharirfan.com).
+GPL2+ © [Ashar Irfan](https://asharirfan.com).
