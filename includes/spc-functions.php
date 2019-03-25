@@ -57,6 +57,6 @@ function spc_primary_term_shortcode( $atts ) {
 	$primary_term_posts = spc_get_primary_term_posts( $term, $args['taxonomy'], $post_query_args );
 
 	// Action hook to display queries posts in themes.
-	do_action( 'spc_primary_term_posts_display', $primary_term_posts );
+	do_action( 'spc_display_primary_term_posts', $primary_term_posts );
 }
 add_shortcode( 'spc_primary_term_posts', 'spc_primary_term_shortcode' );
