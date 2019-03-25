@@ -1,13 +1,12 @@
 {
-  "name": "your-project",
-  "description": "A WPGulp based project.",
+  "name": "simple-primary-category",
+  "description": "A light-weight WordPress plugin to assign & query posts and custom post types based on their primary taxonomy.",
   "version": "1.0.0",
-  "author": "Author Name (https://twitter.com/MrAhmadAwais/)",
+  "author": "Ashar Irfan (https://twitter.com/MrAsharIrfan/)",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ahmadawais/WPGulp"
+    "url": "https://github.com/asharirfan/simple-primary-category"
   },
-  "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
