@@ -5,7 +5,7 @@
  * Description: A light-weight WordPress plugin to assign primary category to posts and custom post types.
  * Author: mrasharirfan
  * Author URI: https://AsharIrfan.com/
- * Version: 0.1
+ * Version: 1.0.0
  * License: GPL2+
  * License URI: https://www.gnu.org/licenses/gpl-2.0.txt
  *
