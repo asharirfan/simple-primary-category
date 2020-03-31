@@ -47,11 +47,11 @@ class SPC_Admin {
 		}
 
 		$suffix  = ( defined( 'WP_DEBUG' ) && WP_DEBUG ) ? '' : '.min';
-		$version = ( defined( 'WP_DEBUG' ) && WP_DEBUG ) ? filemtime( SPC_BASE_DIR . 'assets/js/spc-taxonomy.js' ) : SPC_VERSION;
+		$version = ( defined( 'WP_DEBUG' ) && WP_DEBUG ) ? filemtime( SPC_BASE_DIR . 'dist/index.js' ) : SPC_VERSION;
 
 		wp_register_script(
 			'spc-taxonomy',
-			SPC_BASE_URL . 'assets/js/spc-taxonomy' . $suffix . '.js',
+			SPC_BASE_URL . 'dist/index' . $suffix . '.js',
 			array( 'jquery' ),
 			$version,
 			true
