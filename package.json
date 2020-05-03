@@ -28,6 +28,6 @@
   },
   "scripts": {
     "start": "wp-scripts start --config config/webpack.config.js",
-    "build": "wp-scripts build"
+    "build": "wp-scripts build --config config/webpack.config.js"
   }
 }
