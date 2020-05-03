@@ -51,7 +51,7 @@ class SPC_Admin {
 
 		wp_register_script(
 			'spc-taxonomy',
-			SPC_BASE_URL . 'dist/index' . $suffix . '.js',
+			SPC_BASE_URL . 'build/index.js',
 			array( 'jquery' ),
 			$version,
 			true
@@ -59,7 +59,9 @@ class SPC_Admin {
 		wp_enqueue_script( 'spc-taxonomy' );
 
 		wp_localize_script(
-			'spc-taxonomy', 'spcData', array(
+			'spc-taxonomy',
+			'spcData',
+			array(
 				'taxonomies' => array_map( array( $this, 'get_taxonomies_for_js' ), $post_taxonomies ),
 			)
 		);
