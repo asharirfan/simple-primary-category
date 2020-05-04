@@ -47,7 +47,7 @@ class SPC_Admin {
 		}
 
 		$suffix  = ( defined( 'WP_DEBUG' ) && WP_DEBUG ) ? '' : '.min';
-		$version = ( defined( 'WP_DEBUG' ) && WP_DEBUG ) ? filemtime( SPC_BASE_DIR . 'dist/index.js' ) : SPC_VERSION;
+		$version = ( defined( 'WP_DEBUG' ) && WP_DEBUG ) ? filemtime( SPC_BASE_DIR . 'build/index.js' ) : SPC_VERSION;
 
 		wp_register_script(
 			'spc-taxonomy',
@@ -185,10 +185,11 @@ class SPC_Admin {
 	 */
 	public function get_taxonomies_for_js( $taxonomy ) {
 		return array(
-			'name'    => $taxonomy->name,
-			'title'   => $taxonomy->labels->singular_name,
-			'primary' => $this->get_primary_term( $taxonomy->name ),
-			'terms'   => array_map( array( $this, 'get_terms_for_js' ), get_terms( $taxonomy->name ) ),
+			'name'     => $taxonomy->name,
+			'title'    => $taxonomy->labels->singular_name,
+			'primary'  => $this->get_primary_term( $taxonomy->name ),
+			'restBase' => $taxonomy->rest_base,
+			'terms'    => array_map( array( $this, 'get_terms_for_js' ), get_terms( $taxonomy->name ) ),
 		);
 	}
 
