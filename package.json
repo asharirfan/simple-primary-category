@@ -29,7 +29,7 @@
     "webpack-fix-style-only-entries": "^0.4.0"
   },
   "scripts": {
-    "start": "wp-scripts start",
-    "build": "wp-scripts build"
+    "start": "wp-scripts start --config config/webpack.config.js",
+    "build": "wp-scripts build --config config/webpack.config.js"
   }
 }
