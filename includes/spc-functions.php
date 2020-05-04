@@ -35,7 +35,8 @@ function spc_primary_term_shortcode( $atts ) {
 			'post_type'      => 'post',
 			'post_status'    => 'publish',
 			'posts_per_page' => 10,
-		), $atts
+		),
+		$atts
 	);
 
 	// Post query arguments from shortcode.
@@ -60,3 +61,41 @@ function spc_primary_term_shortcode( $atts ) {
 	do_action( 'spc_display_primary_term_posts', $primary_term_posts );
 }
 add_shortcode( 'spc_primary_term_posts', 'spc_primary_term_shortcode' );
+
+/**
+ * Register SPC meta for REST API.
+ *
+ * @return void
+ */
+function spc_register_meta_for_rest() {
+	$post_types     = get_post_types();
+	$taxonomies     = array();
+	$excluded_types = apply_filters( 'wpc_primary_term_rest_excluded_post_types', array( 'attachment', 'revision', 'nav_menu_item', 'custom_css', 'customize_changeset', 'oembed_cache', 'user_request', 'wp_block' ) );
+
+	foreach ( $post_types as $post_type ) {
+		if ( in_array( $post_type, $excluded_types, true ) ) {
+			continue;
+		}
+
+		$taxonomies = get_object_taxonomies( $post_type, 'objects' );
+
+		if ( ! empty( $taxonomies ) && is_array( $taxonomies ) ) {
+			foreach ( $taxonomies as $taxonomy_name => $taxonomy ) {
+				if ( ! $taxonomy->hierarchical ) {
+					continue;
+				}
+
+				register_post_meta(
+					$post_type,
+					'spc_primary_' . $taxonomy_name,
+					array(
+						'show_in_rest' => true,
+						'single'       => true,
+						'type'         => 'integer',
+					)
+				);
+			}
+		}
+	}
+}
+add_action( 'init', 'spc_register_meta_for_rest' );

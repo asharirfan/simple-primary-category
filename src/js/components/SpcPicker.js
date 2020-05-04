@@ -1,44 +1,66 @@
 /**
  * SPC Picker
  */
-
-import { Component, Fragment } from '@wordpress/element';
-import { withSelect } from '@wordpress/data';
+import { withSelect, withDispatch } from '@wordpress/data';
 import { compose } from '@wordpress/compose';
 
-class SPCPicker extends Component {
+const SPCPicker = props => {
+	const {
+		primaryTaxonomy,
+		selectedTermsIds
+	} = props;
+	const { primary, title, terms } = primaryTaxonomy;
+	const taxonomy = primaryTaxonomy.name;
 
-	render() {
-		const {
-			primaryTaxonomy,
-			selectedTermsIds
-		} = this.props;
-
-		return (
-			<Fragment>
-				<div style={{marginTop:'12px'}}>
-					<p><strong>Primary {primaryTaxonomy.title}</strong></p>
-					<select name={`spc-primary-term-${primaryTaxonomy.name}`} id={`spc_primary_term_${primaryTaxonomy.name}`}>
-						<option value="-1">— Select Primary {primaryTaxonomy.title} —</option>
-						{primaryTaxonomy.terms.map( term => {
-							if ( selectedTermsIds.includes( term.id ) ) {
-								return (
-									<option value={term.id}>{term.name}</option>
-								)
-							}
-						})}
-					</select>
-				</div>
-			</Fragment>
-		);
+	/**
+	 * SPC selector onChange event handler.
+	 *
+	 * @param {object} event Event object.
+	 */
+	const onSelectChange = (event) => {
+		const metaObj = {};
+		metaObj[`spc_primary_${taxonomy}`] = parseInt( event.target.value, 10 );
+		props.updateSPC( metaObj );
 	}
+
+	return (
+		<div style={{marginTop:'12px'}}>
+			<p><strong>Primary {title}</strong></p>
+			<select onChange={onSelectChange}>
+				<option value="-1">— Select Primary {title} —</option>
+				{terms.map( term => {
+					if ( selectedTermsIds.includes( term.id ) ) {
+						if ( primary === term.id ) {
+							return (
+								<option value={term.id} selected>{term.name}</option>
+							)
+						}
+						return (
+							<option value={term.id}>{term.name}</option>
+						)
+					}
+				})}
+			</select>
+		</div>
+	);
 }
 
 export default compose( [
-	withSelect( ( select, props ) => {
-		const editor = select( 'core/editor' );
-		const { primaryTaxonomy } = props;
-		const editorSelectedTermsIds = editor.getEditedPostAttribute( primaryTaxonomy.restBase );
-		return { selectedTermsIds: editorSelectedTermsIds }
+	withSelect( ( select, { primaryTaxonomy } ) => {
+		const { getEditedPostAttribute } = select( 'core/editor' );
+
+		return {
+			selectedTermsIds: getEditedPostAttribute( primaryTaxonomy.restBase ),
+			meta: getEditedPostAttribute( 'meta' )
+		}
+	}),
+	withDispatch( dispatch => {
+		const { editPost } = dispatch( 'core/editor' );
+
+		return {
+			updateSPC( newMeta ) {
+				editPost( { meta: newMeta } );
+			}
+		}
 	})
 ] )(SPCPicker);
