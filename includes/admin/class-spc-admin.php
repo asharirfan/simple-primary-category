@@ -46,12 +46,20 @@ class SPC_Admin {
 			return;
 		}
 
+		// Get current screen to determine the script name to be enqueued.
+		$current_screen = get_current_screen();
+		$script_name    = 'spc-classic-editor';
+
+		if ( isset( $current_screen->is_block_editor ) && $current_screen->is_block_editor ) {
+			$script_name = 'spc-gutenberg';
+		}
+
 		$suffix  = ( defined( 'WP_DEBUG' ) && WP_DEBUG ) ? '' : '.min';
-		$version = ( defined( 'WP_DEBUG' ) && WP_DEBUG ) ? filemtime( SPC_BASE_DIR . 'build/index.js' ) : SPC_VERSION;
+		$version = ( defined( 'WP_DEBUG' ) && WP_DEBUG ) ? filemtime( SPC_BASE_DIR . 'dist/' . $script_name . '.js' ) : SPC_VERSION;
 
 		wp_register_script(
 			'spc-taxonomy',
-			SPC_BASE_URL . 'build/index.js',
+			SPC_BASE_URL . 'dist/' . $script_name . $suffix . '.js',
 			array( 'jquery' ),
 			$version,
 			true

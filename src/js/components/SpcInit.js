@@ -2,7 +2,6 @@
  * SPC Init
  */
 import {Component, Fragment} from '@wordpress/element';
-import {values} from 'lodash-es';
 import SPCPicker from './SpcPicker';
 
 export default class SPCInit extends Component {
