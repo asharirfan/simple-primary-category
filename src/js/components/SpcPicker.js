@@ -1,85 +1,107 @@
 /**
  * SPC Picker
  */
-import { Fragment, useState } from '@wordpress/element';
+import { Component, Fragment } from '@wordpress/element';
 import { withSelect, withDispatch } from '@wordpress/data';
 import apiFetch from '@wordpress/api-fetch';
 import { addQueryArgs } from '@wordpress/url';
 import { compose } from '@wordpress/compose';
 import { __, sprintf } from "@wordpress/i18n";
 
-const SPCPicker = props => {
-	const {
-		primaryTaxonomy,
-		selectedTermsIds
-	} = props;
-	const { primary, title, restBase } = primaryTaxonomy;
-	const taxonomy = primaryTaxonomy.name;
+class SPCPicker extends Component {
+	constructor() {
+		super();
 
-	// Declare component state.
-	const [ terms, setTerms ] = useState( null );
+		this.state = {
+			terms: null,
+			primaryTermId: 0
+		}
+	}
 
-	// Taxonomy terms fetch request.
-	const termsRequest = apiFetch( {
-		path: addQueryArgs(
-			`/wp/v2/${ restBase }`,
-			{
-				_fields: 'id,name',
-				orderby: 'count',
-				order: 'desc',
-				'per_page': -1
-			}
-		)
-	} );
+	/**
+	 * Fetch terms on component mount.
+	 */
+	componentDidMount() {
+		// Taxonomy terms fetch request.
+		const termsRequest = apiFetch( {
+			path: addQueryArgs(
+				`/wp/v2/${ this.props.primaryTaxonomy.restBase }`,
+				{
+					_fields: 'id,name',
+					orderby: 'count',
+					order: 'desc',
+					'per_page': -1
+				}
+			)
+		} );
 
-	// Set terms state on fetch request completion.
-	termsRequest.then( termsResponse => {
-		setTerms( termsResponse );
-	} );
+		// Set terms state on fetch request completion.
+		termsRequest.then( termsResponse => {
+			this.setState( { terms: termsResponse } );
+		} );
+
+		// Set the primary term id.
+		this.setState( { primaryTermId: this.props.primaryTaxonomy.primary } );
+	}
 
 	/**
 	 * SPC selector onChange event handler.
 	 *
 	 * @param {object} event Event object.
 	 */
-	const onSelectChange = (event) => {
+	onSelectChange( event ) {
+		const taxonomy = this.props.primaryTaxonomy.name;
 		const metaObj = {};
 		metaObj[`spc_primary_${taxonomy}`] = parseInt( event.target.value, 10 );
-		props.updateSPC( metaObj );
+		this.props.updateSPC( metaObj );
+		this.setState( { primaryTermId: event.target.value } );
 	}
 
-	return (
-		<Fragment>
-			<h4>
-				{ sprintf(
-					/* translators: %s expands to taxonomy title. */
-					__( 'Primary %s', 'simple-primary-category' ),
-					title
-				) }
-			</h4>
-			<select onChange={onSelectChange}>
-				<option value="-1">
+	/**
+	 * Renders the SPCPicker component.
+	 *
+	 * @returns {ReactElement}
+	 */
+	render() {
+		const {
+			primaryTaxonomy,
+			selectedTermsIds
+		} = this.props;
+		const { title } = primaryTaxonomy;
+
+		return (
+			<Fragment>
+				<h4>
 					{ sprintf(
 						/* translators: %s expands to taxonomy title. */
-						__( '— Select Primary %s —', 'simple-primary-category' ),
+						__( 'Primary %s', 'simple-primary-category' ),
 						title
 					) }
-				</option>
-				{ terms && terms.map( term => {
-					if ( selectedTermsIds.includes( term.id ) ) {
-						if ( primary === term.id ) {
+				</h4>
+				<select onChange={ this.onSelectChange.bind( this ) }>
+					<option value="-1">
+						{ sprintf(
+							/* translators: %s expands to taxonomy title. */
+							__( '— Select Primary %s —', 'simple-primary-category' ),
+							title
+						) }
+					</option>
+					{ this.state.terms && this.state.terms.map( term => {
+						if ( selectedTermsIds.includes( term.id ) ) {
+							if ( this.state.primaryTermId === term.id ) {
+								return (
+									<option value={term.id} selected>{term.name}</option>
+								)
+							}
 							return (
-								<option value={term.id} selected>{term.name}</option>
+								<option value={term.id}>{term.name}</option>
 							)
 						}
-						return (
-							<option value={term.id}>{term.name}</option>
-						)
-					}
-				})}
-			</select>
-		</Fragment>
-	);
+					})}
+				</select>
+			</Fragment>
+		);
+	}
 }
 
 export default compose( [
