@@ -46,12 +46,20 @@ class SPC_Admin {
 			return;
 		}
 
+		// Get current screen to determine the script name to be enqueued.
+		$current_screen = get_current_screen();
+		$script_name    = 'spc-classic-editor';
+
+		if ( isset( $current_screen->is_block_editor ) && $current_screen->is_block_editor ) {
+			$script_name = 'spc-gutenberg';
+		}
+
 		$suffix  = ( defined( 'WP_DEBUG' ) && WP_DEBUG ) ? '' : '.min';
-		$version = ( defined( 'WP_DEBUG' ) && WP_DEBUG ) ? filemtime( SPC_BASE_DIR . 'dist/index.js' ) : SPC_VERSION;
+		$version = ( defined( 'WP_DEBUG' ) && WP_DEBUG ) ? filemtime( SPC_BASE_DIR . 'dist/' . $script_name . '.js' ) : SPC_VERSION;
 
 		wp_register_script(
 			'spc-taxonomy',
-			SPC_BASE_URL . 'dist/index' . $suffix . '.js',
+			SPC_BASE_URL . 'dist/' . $script_name . $suffix . '.js',
 			array( 'jquery' ),
 			$version,
 			true
@@ -59,7 +67,9 @@ class SPC_Admin {
 		wp_enqueue_script( 'spc-taxonomy' );
 
 		wp_localize_script(
-			'spc-taxonomy', 'spcData', array(
+			'spc-taxonomy',
+			'spcData',
+			array(
 				'taxonomies' => array_map( array( $this, 'get_taxonomies_for_js' ), $post_taxonomies ),
 			)
 		);
@@ -183,10 +193,11 @@ class SPC_Admin {
 	 */
 	public function get_taxonomies_for_js( $taxonomy ) {
 		return array(
-			'name'    => $taxonomy->name,
-			'title'   => $taxonomy->labels->singular_name,
-			'primary' => $this->get_primary_term( $taxonomy->name ),
-			'terms'   => array_map( array( $this, 'get_terms_for_js' ), get_terms( $taxonomy->name ) ),
+			'name'     => $taxonomy->name,
+			'title'    => $taxonomy->labels->singular_name,
+			'primary'  => $this->get_primary_term( $taxonomy->name ),
+			'restBase' => $taxonomy->rest_base,
+			'terms'    => array_map( array( $this, 'get_terms_for_js' ), get_terms( $taxonomy->name ) ),
 		);
 	}
 
