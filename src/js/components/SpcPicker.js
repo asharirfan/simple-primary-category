@@ -42,7 +42,7 @@ const SPCPicker = props => {
 						title
 					) }
 				</option>
-				{terms.map( term => {
+				{ terms && terms.map( term => {
 					if ( selectedTermsIds.includes( term.id ) ) {
 						if ( primary === term.id ) {
 							return (
