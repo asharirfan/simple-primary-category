@@ -1,8 +1,10 @@
 /**
  * SPC Picker
  */
-import { Fragment } from '@wordpress/element';
+import { Fragment, useState } from '@wordpress/element';
 import { withSelect, withDispatch } from '@wordpress/data';
+import apiFetch from '@wordpress/api-fetch';
+import { addQueryArgs } from '@wordpress/url';
 import { compose } from '@wordpress/compose';
 import { __, sprintf } from "@wordpress/i18n";
 
@@ -11,8 +13,29 @@ const SPCPicker = props => {
 		primaryTaxonomy,
 		selectedTermsIds
 	} = props;
-	const { primary, title, terms } = primaryTaxonomy;
+	const { primary, title, restBase } = primaryTaxonomy;
 	const taxonomy = primaryTaxonomy.name;
+
+	// Declare component state.
+	const [ terms, setTerms ] = useState( null );
+
+	// Taxonomy terms fetch request.
+	const termsRequest = apiFetch( {
+		path: addQueryArgs(
+			`/wp/v2/${ restBase }`,
+			{
+				_fields: 'id,name',
+				orderby: 'count',
+				order: 'desc',
+				'per_page': -1
+			}
+		)
+	} );
+
+	// Set terms state on fetch request completion.
+	termsRequest.then( termsResponse => {
+		setTerms( termsResponse );
+	} );
 
 	/**
 	 * SPC selector onChange event handler.

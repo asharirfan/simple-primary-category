@@ -192,17 +192,12 @@ class SPC_Admin {
 	 * @return array
 	 */
 	public function get_taxonomies_for_js( $taxonomy ) {
-		$term_args = array(
-			'taxonomy'   => $taxonomy->name,
-			'hide_empty' => false,
-		);
-
 		return array(
 			'name'     => $taxonomy->name,
 			'title'    => $taxonomy->labels->singular_name,
 			'primary'  => $this->get_primary_term( $taxonomy->name ),
 			'restBase' => $taxonomy->rest_base,
-			'terms'    => array_map( array( $this, 'get_terms_for_js' ), get_terms( $term_args ) ),
+			'terms'    => array_map( array( $this, 'get_terms_for_js' ), get_terms( $taxonomy->name ) ),
 		);
 	}
 
