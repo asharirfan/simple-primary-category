@@ -98,4 +98,4 @@ function spc_register_meta_for_rest() {
 		}
 	}
 }
-add_action( 'init', 'spc_register_meta_for_rest' );
+add_action( 'init', 'spc_register_meta_for_rest', 9999 );
