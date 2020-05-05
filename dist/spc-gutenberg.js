@@ -86,6 +86,28 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./node_modules/@babel/runtime/helpers/arrayLikeToArray.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/arrayLikeToArray.js ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("function _arrayLikeToArray(arr, len) {\n  if (len == null || len > arr.length) len = arr.length;\n\n  for (var i = 0, arr2 = new Array(len); i < len; i++) {\n    arr2[i] = arr[i];\n  }\n\n  return arr2;\n}\n\nmodule.exports = _arrayLikeToArray;\n\n//# sourceURL=webpack:///./node_modules/@babel/runtime/helpers/arrayLikeToArray.js?");
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/arrayWithHoles.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/arrayWithHoles.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("function _arrayWithHoles(arr) {\n  if (Array.isArray(arr)) return arr;\n}\n\nmodule.exports = _arrayWithHoles;\n\n//# sourceURL=webpack:///./node_modules/@babel/runtime/helpers/arrayWithHoles.js?");
+
+/***/ }),
+
 /***/ "./node_modules/@babel/runtime/helpers/assertThisInitialized.js":
 /*!**********************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/assertThisInitialized.js ***!
@@ -152,6 +174,28 @@ eval("var setPrototypeOf = __webpack_require__(/*! ./setPrototypeOf */ \"./node_
 
 /***/ }),
 
+/***/ "./node_modules/@babel/runtime/helpers/iterableToArrayLimit.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/iterableToArrayLimit.js ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("function _iterableToArrayLimit(arr, i) {\n  if (typeof Symbol === \"undefined\" || !(Symbol.iterator in Object(arr))) return;\n  var _arr = [];\n  var _n = true;\n  var _d = false;\n  var _e = undefined;\n\n  try {\n    for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {\n      _arr.push(_s.value);\n\n      if (i && _arr.length === i) break;\n    }\n  } catch (err) {\n    _d = true;\n    _e = err;\n  } finally {\n    try {\n      if (!_n && _i[\"return\"] != null) _i[\"return\"]();\n    } finally {\n      if (_d) throw _e;\n    }\n  }\n\n  return _arr;\n}\n\nmodule.exports = _iterableToArrayLimit;\n\n//# sourceURL=webpack:///./node_modules/@babel/runtime/helpers/iterableToArrayLimit.js?");
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/nonIterableRest.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/nonIterableRest.js ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("function _nonIterableRest() {\n  throw new TypeError(\"Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.\");\n}\n\nmodule.exports = _nonIterableRest;\n\n//# sourceURL=webpack:///./node_modules/@babel/runtime/helpers/nonIterableRest.js?");
+
+/***/ }),
+
 /***/ "./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js":
 /*!**************************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js ***!
@@ -174,6 +218,17 @@ eval("function _setPrototypeOf(o, p) {\n  module.exports = _setPrototypeOf = Obj
 
 /***/ }),
 
+/***/ "./node_modules/@babel/runtime/helpers/slicedToArray.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/slicedToArray.js ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("var arrayWithHoles = __webpack_require__(/*! ./arrayWithHoles */ \"./node_modules/@babel/runtime/helpers/arrayWithHoles.js\");\n\nvar iterableToArrayLimit = __webpack_require__(/*! ./iterableToArrayLimit */ \"./node_modules/@babel/runtime/helpers/iterableToArrayLimit.js\");\n\nvar unsupportedIterableToArray = __webpack_require__(/*! ./unsupportedIterableToArray */ \"./node_modules/@babel/runtime/helpers/unsupportedIterableToArray.js\");\n\nvar nonIterableRest = __webpack_require__(/*! ./nonIterableRest */ \"./node_modules/@babel/runtime/helpers/nonIterableRest.js\");\n\nfunction _slicedToArray(arr, i) {\n  return arrayWithHoles(arr) || iterableToArrayLimit(arr, i) || unsupportedIterableToArray(arr, i) || nonIterableRest();\n}\n\nmodule.exports = _slicedToArray;\n\n//# sourceURL=webpack:///./node_modules/@babel/runtime/helpers/slicedToArray.js?");
+
+/***/ }),
+
 /***/ "./node_modules/@babel/runtime/helpers/typeof.js":
 /*!*******************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/typeof.js ***!
@@ -182,6 +237,17 @@ eval("function _setPrototypeOf(o, p) {\n  module.exports = _setPrototypeOf = Obj
 /***/ (function(module, exports) {
 
 eval("function _typeof(obj) {\n  \"@babel/helpers - typeof\";\n\n  if (typeof Symbol === \"function\" && typeof Symbol.iterator === \"symbol\") {\n    module.exports = _typeof = function _typeof(obj) {\n      return typeof obj;\n    };\n  } else {\n    module.exports = _typeof = function _typeof(obj) {\n      return obj && typeof Symbol === \"function\" && obj.constructor === Symbol && obj !== Symbol.prototype ? \"symbol\" : typeof obj;\n    };\n  }\n\n  return _typeof(obj);\n}\n\nmodule.exports = _typeof;\n\n//# sourceURL=webpack:///./node_modules/@babel/runtime/helpers/typeof.js?");
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/unsupportedIterableToArray.js":
+/*!***************************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/unsupportedIterableToArray.js ***!
+  \***************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("var arrayLikeToArray = __webpack_require__(/*! ./arrayLikeToArray */ \"./node_modules/@babel/runtime/helpers/arrayLikeToArray.js\");\n\nfunction _unsupportedIterableToArray(o, minLen) {\n  if (!o) return;\n  if (typeof o === \"string\") return arrayLikeToArray(o, minLen);\n  var n = Object.prototype.toString.call(o).slice(8, -1);\n  if (n === \"Object\" && o.constructor) n = o.constructor.name;\n  if (n === \"Map\" || n === \"Set\") return Array.from(o);\n  if (n === \"Arguments\" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return arrayLikeToArray(o, minLen);\n}\n\nmodule.exports = _unsupportedIterableToArray;\n\n//# sourceURL=webpack:///./node_modules/@babel/runtime/helpers/unsupportedIterableToArray.js?");
 
 /***/ }),
 
@@ -205,7 +271,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _bab
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ \"@wordpress/element\");\n/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/data */ \"@wordpress/data\");\n/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/compose */ \"@wordpress/compose\");\n/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_compose__WEBPACK_IMPORTED_MODULE_2__);\n/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/i18n */ \"@wordpress/i18n\");\n/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__);\n\n\n/**\n * SPC Picker\n */\n\n\n\n\n\nvar SPCPicker = function SPCPicker(props) {\n  var primaryTaxonomy = props.primaryTaxonomy,\n      selectedTermsIds = props.selectedTermsIds;\n  var primary = primaryTaxonomy.primary,\n      title = primaryTaxonomy.title,\n      terms = primaryTaxonomy.terms;\n  var taxonomy = primaryTaxonomy.name;\n  /**\n   * SPC selector onChange event handler.\n   *\n   * @param {object} event Event object.\n   */\n\n  var onSelectChange = function onSelectChange(event) {\n    var metaObj = {};\n    metaObj[\"spc_primary_\".concat(taxonomy)] = parseInt(event.target.value, 10);\n    props.updateSPC(metaObj);\n  };\n\n  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__[\"createElement\"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__[\"Fragment\"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__[\"createElement\"])(\"h4\", null, Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__[\"sprintf\"])(\n  /* translators: %s expands to taxonomy title. */\n  Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__[\"__\"])('Primary %s', 'simple-primary-category'), title)), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__[\"createElement\"])(\"select\", {\n    onChange: onSelectChange\n  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__[\"createElement\"])(\"option\", {\n    value: \"-1\"\n  }, Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__[\"sprintf\"])(\n  /* translators: %s expands to taxonomy title. */\n  Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__[\"__\"])('— Select Primary %s —', 'simple-primary-category'), title)), terms && terms.map(function (term) {\n    if (selectedTermsIds.includes(term.id)) {\n      if (primary === term.id) {\n        return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__[\"createElement\"])(\"option\", {\n          value: term.id,\n          selected: true\n        }, term.name);\n      }\n\n      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__[\"createElement\"])(\"option\", {\n        value: term.id\n      }, term.name);\n    }\n  })));\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Object(_wordpress_compose__WEBPACK_IMPORTED_MODULE_2__[\"compose\"])([Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__[\"withSelect\"])(function (select, _ref) {\n  var primaryTaxonomy = _ref.primaryTaxonomy;\n\n  var _select = select('core/editor'),\n      getEditedPostAttribute = _select.getEditedPostAttribute;\n\n  return {\n    selectedTermsIds: getEditedPostAttribute(primaryTaxonomy.restBase),\n    meta: getEditedPostAttribute('meta')\n  };\n}), Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__[\"withDispatch\"])(function (dispatch) {\n  var _dispatch = dispatch('core/editor'),\n      editPost = _dispatch.editPost;\n\n  return {\n    updateSPC: function updateSPC(newMeta) {\n      editPost({\n        meta: newMeta\n      });\n    }\n  };\n})])(SPCPicker));\n\n//# sourceURL=webpack:///./src/js/components/SpcPicker.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ \"./node_modules/@babel/runtime/helpers/slicedToArray.js\");\n/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ \"@wordpress/element\");\n/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/data */ \"@wordpress/data\");\n/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_2__);\n/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/api-fetch */ \"@wordpress/api-fetch\");\n/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_3__);\n/* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/url */ \"@wordpress/url\");\n/* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_url__WEBPACK_IMPORTED_MODULE_4__);\n/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/compose */ \"@wordpress/compose\");\n/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_compose__WEBPACK_IMPORTED_MODULE_5__);\n/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/i18n */ \"@wordpress/i18n\");\n/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__);\n\n\n\n/**\n * SPC Picker\n */\n\n\n\n\n\n\n\nvar SPCPicker = function SPCPicker(props) {\n  var primaryTaxonomy = props.primaryTaxonomy,\n      selectedTermsIds = props.selectedTermsIds;\n  var primary = primaryTaxonomy.primary,\n      title = primaryTaxonomy.title,\n      restBase = primaryTaxonomy.restBase;\n  var taxonomy = primaryTaxonomy.name; // Declare component state.\n\n  var _useState = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__[\"useState\"])(null),\n      _useState2 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default()(_useState, 2),\n      terms = _useState2[0],\n      setTerms = _useState2[1]; // Taxonomy terms fetch request.\n\n\n  var termsRequest = _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_3___default()({\n    path: Object(_wordpress_url__WEBPACK_IMPORTED_MODULE_4__[\"addQueryArgs\"])(\"/wp/v2/\".concat(restBase), {\n      _fields: 'id,name',\n      orderby: 'count',\n      order: 'desc',\n      'per_page': -1\n    })\n  }); // Set terms state on fetch request completion.\n\n  termsRequest.then(function (termsResponse) {\n    setTerms(termsResponse);\n  });\n  /**\n   * SPC selector onChange event handler.\n   *\n   * @param {object} event Event object.\n   */\n\n  var onSelectChange = function onSelectChange(event) {\n    var metaObj = {};\n    metaObj[\"spc_primary_\".concat(taxonomy)] = parseInt(event.target.value, 10);\n    props.updateSPC(metaObj);\n  };\n\n  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__[\"createElement\"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__[\"Fragment\"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__[\"createElement\"])(\"h4\", null, Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__[\"sprintf\"])(\n  /* translators: %s expands to taxonomy title. */\n  Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__[\"__\"])('Primary %s', 'simple-primary-category'), title)), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__[\"createElement\"])(\"select\", {\n    onChange: onSelectChange\n  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__[\"createElement\"])(\"option\", {\n    value: \"-1\"\n  }, Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__[\"sprintf\"])(\n  /* translators: %s expands to taxonomy title. */\n  Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__[\"__\"])('— Select Primary %s —', 'simple-primary-category'), title)), terms && terms.map(function (term) {\n    if (selectedTermsIds.includes(term.id)) {\n      if (primary === term.id) {\n        return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__[\"createElement\"])(\"option\", {\n          value: term.id,\n          selected: true\n        }, term.name);\n      }\n\n      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__[\"createElement\"])(\"option\", {\n        value: term.id\n      }, term.name);\n    }\n  })));\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Object(_wordpress_compose__WEBPACK_IMPORTED_MODULE_5__[\"compose\"])([Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_2__[\"withSelect\"])(function (select, _ref) {\n  var primaryTaxonomy = _ref.primaryTaxonomy;\n\n  var _select = select('core/editor'),\n      getEditedPostAttribute = _select.getEditedPostAttribute;\n\n  return {\n    selectedTermsIds: getEditedPostAttribute(primaryTaxonomy.restBase),\n    meta: getEditedPostAttribute('meta')\n  };\n}), Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_2__[\"withDispatch\"])(function (dispatch) {\n  var _dispatch = dispatch('core/editor'),\n      editPost = _dispatch.editPost;\n\n  return {\n    updateSPC: function updateSPC(newMeta) {\n      editPost({\n        meta: newMeta\n      });\n    }\n  };\n})])(SPCPicker));\n\n//# sourceURL=webpack:///./src/js/components/SpcPicker.js?");
 
 /***/ }),
 
@@ -218,6 +284,17 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _wor
 
 "use strict";
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/extends */ \"./node_modules/@babel/runtime/helpers/extends.js\");\n/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ \"@wordpress/element\");\n/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _components_SpcInit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/SpcInit */ \"./src/js/components/SpcInit.js\");\n\n\n\n/**\n * SPC Gutenberg Scripts\n */\n // Init Gutenberg SPC selector.\n\nspcGutenbergInit();\n/**\n * Check if Gutenberg is active.\n */\n\nfunction isGutenbergActive() {\n  return 'undefined' !== typeof wp && 'undefined' !== typeof wp.blocks;\n}\n/**\n * Add SPC component to Gutenberg post taxonomies component.\n *\n * @param {ReactElement} PostTaxonomiesComponent Post taxonomies component of Gutenberg.\n */\n\n\nfunction addSpcComponent(PostTaxonomiesComponent) {\n  return function (props) {\n    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__[\"createElement\"])(_components_SpcInit__WEBPACK_IMPORTED_MODULE_2__[\"default\"], _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({\n      TaxonomyComponent: PostTaxonomiesComponent\n    }, props));\n  };\n}\n/**\n * Init Gutenberg SPC selector.\n */\n\n\nfunction spcGutenbergInit() {\n  if (!isGutenbergActive()) {\n    return;\n  }\n\n  wp.hooks.addFilter('editor.PostTaxonomyType', 'simple-primary-category', addSpcComponent);\n}\n\n//# sourceURL=webpack:///./src/js/spc-gutenberg.js?");
+
+/***/ }),
+
+/***/ "@wordpress/api-fetch":
+/*!*******************************************!*\
+  !*** external {"this":["wp","apiFetch"]} ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("(function() { module.exports = this[\"wp\"][\"apiFetch\"]; }());\n\n//# sourceURL=webpack:///external_%7B%22this%22:%5B%22wp%22,%22apiFetch%22%5D%7D?");
 
 /***/ }),
 
@@ -262,6 +339,17 @@ eval("(function() { module.exports = this[\"wp\"][\"element\"]; }());\n\n//# sou
 /***/ (function(module, exports) {
 
 eval("(function() { module.exports = this[\"wp\"][\"i18n\"]; }());\n\n//# sourceURL=webpack:///external_%7B%22this%22:%5B%22wp%22,%22i18n%22%5D%7D?");
+
+/***/ }),
+
+/***/ "@wordpress/url":
+/*!**************************************!*\
+  !*** external {"this":["wp","url"]} ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("(function() { module.exports = this[\"wp\"][\"url\"]; }());\n\n//# sourceURL=webpack:///external_%7B%22this%22:%5B%22wp%22,%22url%22%5D%7D?");
 
 /***/ })
 
