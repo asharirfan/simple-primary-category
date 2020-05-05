@@ -1,8 +1,10 @@
 /**
  * SPC Picker
  */
+import { Fragment } from '@wordpress/element';
 import { withSelect, withDispatch } from '@wordpress/data';
 import { compose } from '@wordpress/compose';
+import { __, sprintf } from "@wordpress/i18n";
 
 const SPCPicker = props => {
 	const {
@@ -24,10 +26,22 @@ const SPCPicker = props => {
 	}
 
 	return (
-		<div style={{marginTop:'12px'}}>
-			<p><strong>Primary {title}</strong></p>
+		<Fragment>
+			<h4>
+				{ sprintf(
+					/* translators: %s expands to taxonomy title. */
+					__( 'Primary %s', 'simple-primary-category' ),
+					title
+				) }
+			</h4>
 			<select onChange={onSelectChange}>
-				<option value="-1">— Select Primary {title} —</option>
+				<option value="-1">
+					{ sprintf(
+						/* translators: %s expands to taxonomy title. */
+						__( '— Select Primary %s —', 'simple-primary-category' ),
+						title
+					) }
+				</option>
 				{terms.map( term => {
 					if ( selectedTermsIds.includes( term.id ) ) {
 						if ( primary === term.id ) {
@@ -41,7 +55,7 @@ const SPCPicker = props => {
 					}
 				})}
 			</select>
-		</div>
+		</Fragment>
 	);
 }
 
