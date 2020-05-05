@@ -16,9 +16,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <script type="text/html" id="tmpl-spc-select-primary-term">
 	<div class="spc-primary-term">
-		<p class="spc-primary-term-heading"><strong>Primary {{data.taxonomy.title}}</strong></p>
+		<h4 class="spc-primary-term-heading">
+			<?php
+			/* translators: %s expands to taxonomy title. */
+			echo sprintf( esc_html__( 'Primary %s', 'simple-primary-category' ), '{{data.taxonomy.title}}' );
+			?>
+		</h4>
 		<select id="spc-primary-term-{{data.taxonomy.name}}" name="spc_primary_term_{{data.taxonomy.name}}">
-			<option value="-1">— Select Primary {{data.taxonomy.title}} —</option>
+			<option value="-1">
+				<?php
+				/* translators: %s expands to taxonomy title. */
+				echo sprintf( esc_html__( '— Select Primary %s —', 'simple-primary-category' ), '{{data.taxonomy.title}}' );
+				?>
+			</option>
 			<# _( data.taxonomy.terms ).each( function( term ) { #>
 				<option value="{{term.id}}"
 				<# if ( data.taxonomy.primary === term.id ) { #>
