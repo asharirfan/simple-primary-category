@@ -1,7 +1,6 @@
 /**
  * SPC Gutenberg Scripts
  */
-import {Component} from '@wordpress/element';
 import SPCInit from './components/SpcInit';
 
 // Init Gutenberg SPC selector.
@@ -15,6 +14,19 @@ function isGutenbergActive() {
 }
 
 /**
+ * Add SPC component to Gutenberg post taxonomies component.
+ *
+ * @param {ReactElement} PostTaxonomiesComponent Post taxonomies component of Gutenberg.
+ */
+function addSpcComponent( PostTaxonomiesComponent ) {
+	return ( props ) => {
+		return (
+			<SPCInit TaxonomyComponent={ PostTaxonomiesComponent } { ...props } />
+		);
+	}
+}
+
+/**
  * Init Gutenberg SPC selector.
  */
 function spcGutenbergInit() {
@@ -22,20 +34,5 @@ function spcGutenbergInit() {
 		return;
 	}
 
-	wp.hooks.addFilter(
-		'editor.PostTaxonomyType',
-		'simple-primary-category',
-		TaxonomyComponent => {
-			return class Filter extends Component {
-				render() {
-					return (
-						<SPCInit
-							TaxonomyComponent={ TaxonomyComponent }
-							{ ...this.props }
-						/>
-					);
-				}
-			}
-		}
-	);
+	wp.hooks.addFilter( 'editor.PostTaxonomyType', 'simple-primary-category', addSpcComponent );
 }
