@@ -1,29 +1,50 @@
 /**
  * SPC Init
  */
-import {Component, Fragment} from '@wordpress/element';
+import { Component, Fragment } from '@wordpress/element';
 import SPCPicker from './SpcPicker';
 
-export default class SPCInit extends Component {
+/**
+ * SPC Init Component
+ */
+class SPCInit extends Component {
 	constructor() {
 		super();
 
 		this.state = {
-			taxonomies: spcData.taxonomies
+			hasError: false,
+			error: null,
 		}
 	}
 
-	hasPrimaryTaxonomySupport() {
-		return this.state.taxonomies.hasOwnProperty( this.props.slug );
+	/**
+	 * Handle the component errors.
+	 *
+	 * @param {object} error Error object.
+	 */
+	static getDerivedStateFromError( error ) {
+		return {
+			hasError: true,
+			error
+		};
 	}
 
+	/**
+	 * Renders the SPCInit component.
+	 *
+	 * @returns {ReactElement}
+	 */
 	render() {
-		const {
-			slug,
-			TaxonomyComponent
-		} = this.props;
+		const { slug, TaxonomyComponent } = this.props;
+		const taxonomies = spcData.taxonomies;
 
-		if ( ! this.hasPrimaryTaxonomySupport() ) {
+		if ( this.state.hasError ) {
+			return (
+				<TaxonomyComponent {...this.props} />
+			);
+		}
+
+		if ( ! taxonomies.hasOwnProperty( slug ) ) {
 			return (
 				<TaxonomyComponent {...this.props} />
 			);
@@ -32,8 +53,10 @@ export default class SPCInit extends Component {
 		return (
 			<Fragment>
 				<TaxonomyComponent {...this.props} />
-				<SPCPicker primaryTaxonomy={ this.state.taxonomies[slug] } />
+				<SPCPicker primaryTaxonomy={ taxonomies[slug] } />
 			</Fragment>
 		);
 	}
 }
+
+export default SPCInit;
