@@ -29,8 +29,12 @@
 | `post_status`    | (Optional) Post status.              | `publish` |
 | `posts_per_page` | (Optional) Number of posts per page. | `10`      |
 
-## 🖥️ Screenshot
-![image](.github/simple-primary-category.jpg)
+## 🖥️ Screenshots
+**Gutenberg**
+![image](https://i.imgur.com/ZkB2V7q.jpg)
+
+**Classic Editor**
+![image](https://i.imgur.com/Ye7ZZM9.jpg)
 
 ## ©️ License & Attribution
 GPL2+ © [Ashar Irfan](https://asharirfan.com).
