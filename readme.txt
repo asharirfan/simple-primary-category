@@ -3,6 +3,7 @@ Contributors: mrasharirfan
 Requires at least: 5.0
 Tested up to: 5.4.1
 Requires PHP: 7.0
+Stable tag: 1.0.0
 License: GPL3+
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
