@@ -1,5 +1,6 @@
 === Simple Primary Category ===
 Contributors: mrasharirfan
+Tags: category,primary,taxonomy
 Requires at least: 5.0
 Tested up to: 5.4.1
 Requires PHP: 7.0
