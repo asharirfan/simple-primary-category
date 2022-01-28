@@ -2,6 +2,8 @@
  * SPC Taxonomy Selection Script.
  */
 
+import { _ } from 'lodash';
+
 /* global spcData, jQuery */
 
 jQuery(document).ready(function () {
