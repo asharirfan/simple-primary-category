@@ -1,0 +1,31 @@
+{
+	"name": "asharirfan/simple-primary-category",
+	"description": "A light-weight WordPress plugin to assign & query posts and custom post types based on their primary taxonomy.",
+	"type": "wordpress-plugin",
+	"license": "GPL-3.0-or-later",
+	"authors": [
+		{
+			"name": "Ashar Irfan",
+			"email": "me@asharirfan.com"
+		}
+	],
+	"config": {
+		"platform": {
+			"php": "7.3"
+		}
+	},
+	"require": {
+		"composer/installers": "^1.11.0"
+	},
+	"minimum-stability": "stable",
+	"require-dev": {
+		"wp-coding-standards/wpcs": "2.3.0",
+		"dealerdirect/phpcodesniffer-composer-installer": "0.7.1",
+		"phpcompatibility/phpcompatibility-wp": "2.1.3"
+	},
+	"scripts": {
+		"format": "phpcbf --report=summary,source",
+		"lint": "phpcs --report=summary,source",
+		"pot": "wp i18n make-pot . build/languages/_s.pot --exclude=node_modules,vendor,build --allow-root"
+	}
+}
