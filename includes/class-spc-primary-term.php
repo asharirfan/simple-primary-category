@@ -55,11 +55,22 @@ class SPC_Primary_Term {
 	 * @return integer|boolean
 	 */
 	public function get_primary_term() {
-		$primary_term = (int) get_post_meta( $this->post_id, $this->primary_meta_key, true );
+
+		$primary_term = (int) get_post_meta(
+			$this->post_id,
+			$this->primary_meta_key,
+			true
+		);
 
 		$post_terms = $this->get_post_terms();
 
-		if ( ! in_array( $primary_term, wp_list_pluck( $post_terms, 'term_id' ), true ) ) {
+		if (
+			! in_array(
+				$primary_term,
+				wp_list_pluck( $post_terms, 'term_id' ),
+				true
+			)
+		) {
 			$primary_term = false;
 		}
 
@@ -72,7 +83,11 @@ class SPC_Primary_Term {
 	 * @param integer $primary_term_id - Primary term id.
 	 */
 	public function save_primary_term( $primary_term_id ) {
-		update_post_meta( $this->post_id, $this->primary_meta_key, $primary_term_id );
+		update_post_meta(
+			$this->post_id,
+			$this->primary_meta_key,
+			$primary_term_id
+		);
 	}
 
 	/**

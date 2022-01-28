@@ -18,7 +18,12 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @return array|false|WP_Error
  */
 function spc_get_primary_term_posts( $term, $taxonomy = '', $args = array() ) {
-	return SPC_Primary_Term_Query::get_posts_by_primary_term( $term, $taxonomy, $args );
+
+	return SPC_Primary_Term_Query::get_posts_by_primary_term(
+		$term,
+		$taxonomy,
+		$args
+	);
 }
 
 /**
@@ -27,6 +32,7 @@ function spc_get_primary_term_posts( $term, $taxonomy = '', $args = array() ) {
  * @param array $atts - Array of attributes.
  */
 function spc_primary_term_shortcode( $atts ) {
+
 	// Get shortcode args.
 	$args = shortcode_atts(
 		array(
@@ -55,7 +61,11 @@ function spc_primary_term_shortcode( $atts ) {
 	}
 
 	// Query posts by term and relevant arguments.
-	$primary_term_posts = spc_get_primary_term_posts( $term, $args['taxonomy'], $post_query_args );
+	$primary_term_posts = spc_get_primary_term_posts(
+		$term,
+		$args['taxonomy'],
+		$post_query_args
+	);
 
 	// Action hook to display queries posts in themes.
 	do_action( 'spc_display_primary_term_posts', $primary_term_posts );
@@ -68,9 +78,22 @@ add_shortcode( 'spc_primary_term_posts', 'spc_primary_term_shortcode' );
  * @return void
  */
 function spc_register_meta_for_rest() {
+
 	$post_types     = get_post_types();
 	$taxonomies     = array();
-	$excluded_types = apply_filters( 'wpc_primary_term_rest_excluded_post_types', array( 'attachment', 'revision', 'nav_menu_item', 'custom_css', 'customize_changeset', 'oembed_cache', 'user_request', 'wp_block' ) );
+	$excluded_types = apply_filters(
+		'wpc_primary_term_rest_excluded_post_types',
+		array(
+			'attachment',
+			'revision',
+			'nav_menu_item',
+			'custom_css',
+			'customize_changeset',
+			'oembed_cache',
+			'user_request',
+			'wp_block',
+		)
+	);
 
 	foreach ( $post_types as $post_type ) {
 		if ( in_array( $post_type, $excluded_types, true ) ) {

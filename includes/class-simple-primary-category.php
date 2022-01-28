@@ -58,8 +58,14 @@ final class Simple_Primary_Category {
 	public function define_constants() {
 		$this->define( 'SPC_VERSION', $this->version );
 		$this->define( 'SPC_BASE_NAME', plugin_basename( SPC_PLUGIN_FILE ) );
-		$this->define( 'SPC_BASE_URL', trailingslashit( plugin_dir_url( SPC_PLUGIN_FILE ) ) );
-		$this->define( 'SPC_BASE_DIR', trailingslashit( plugin_dir_path( SPC_PLUGIN_FILE ) ) );
+		$this->define(
+			'SPC_BASE_URL',
+			trailingslashit( plugin_dir_url( SPC_PLUGIN_FILE ) )
+		);
+		$this->define(
+			'SPC_BASE_DIR',
+			trailingslashit( plugin_dir_path( SPC_PLUGIN_FILE ) )
+		);
 	}
 
 	/**

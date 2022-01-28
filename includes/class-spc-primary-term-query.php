@@ -22,13 +22,22 @@ class SPC_Primary_Term_Query {
 	 * @param integer|string $term     - Term id, slug or name.
 	 * @param string         $taxonomy - Taxonomy slug.
 	 * @param array          $args     - Post query arguments.
+	 *
 	 * @return array|false|WP_Error
 	 */
-	public static function get_posts_by_primary_term( $term, $taxonomy = '', $args = array() ) {
+	public static function get_posts_by_primary_term(
+		$term,
+		$taxonomy = '',
+		$args = array()
+	) {
+
 		$term_id = self::get_term_id( $term, $taxonomy );
 
 		if ( ! $term_id ) {
-			return new WP_Error( 'noterm', __( 'Term does not exist.', 'simple-primary-category' ) );
+			return new WP_Error(
+				'noterm',
+				__( 'Term does not exist.', 'simple-primary-category' )
+			);
 		}
 
 		$query_defaults = array(
@@ -39,7 +48,11 @@ class SPC_Primary_Term_Query {
 
 		if ( '' === $taxonomy ) {
 			$wp_term  = get_term( $term_id );
-			$taxonomy = ( ! is_wp_error( $wp_term ) && ! is_null( $wp_term ) ) ? $wp_term->taxonomy : '';
+			$taxonomy = '';
+
+			if ( ! is_wp_error( $wp_term ) && ! is_null( $wp_term ) ) {
+				$taxonomy = $wp_term->taxonomy;
+			}
 		}
 
 		$meta_query = array(
@@ -66,11 +79,18 @@ class SPC_Primary_Term_Query {
 	 * @return integer
 	 */
 	public static function get_term_id( $term, $taxonomy ) {
-		$term_id = wp_cache_get( 'spc_term_exists_' . $term . '_' . $taxonomy, 'spc' );
+
+		$term_id = wp_cache_get(
+			'spc_term_exists_' . $term . '_' . $taxonomy,
+			'spc'
+		);
 
 		if ( false === $term_id ) {
 			$term_id = term_exists( $term );
-			wp_cache_set( 'spc_term_exists_' . $term . '_' . $taxonomy, $term_id, 'spc' );
+			wp_cache_set(
+				'spc_term_exists_' . $term . '_' . $taxonomy, $term_id,
+				'spc'
+			);
 		}
 
 		return $term_id;
