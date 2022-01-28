@@ -16,23 +16,27 @@ function isGutenbergActive() {
 /**
  * Add SPC component to Gutenberg post taxonomies component.
  *
- * @param {ReactElement} PostTaxonomiesComponent Post taxonomies component of Gutenberg.
+ * @param {Element} PostTaxonomiesComponent Post taxonomies component of Gutenberg.
  */
-function addSpcComponent( PostTaxonomiesComponent ) {
-	return ( props ) => {
+function addSpcComponent(PostTaxonomiesComponent) {
+	return (props) => {
 		return (
-			<SPCInit TaxonomyComponent={ PostTaxonomiesComponent } { ...props } />
+			<SPCInit TaxonomyComponent={PostTaxonomiesComponent} {...props} />
 		);
-	}
+	};
 }
 
 /**
  * Init Gutenberg SPC selector.
  */
 function spcGutenbergInit() {
-	if ( ! isGutenbergActive() ) {
+	if (!isGutenbergActive()) {
 		return;
 	}
 
-	wp.hooks.addFilter( 'editor.PostTaxonomyType', 'simple-primary-category', addSpcComponent );
+	wp.hooks.addFilter(
+		'editor.PostTaxonomyType',
+		'simple-primary-category',
+		addSpcComponent
+	);
 }
