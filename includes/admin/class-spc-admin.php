@@ -118,7 +118,10 @@ class SPC_Admin {
 	 * @return integer
 	 */
 	public function get_primary_term( $taxonomy ) {
-		$primary_term = new SPC_Primary_Term( $this->get_current_post_id(), $taxonomy );
+		$primary_term = new SPC_Primary_Term(
+			$this->get_current_post_id(),
+			$taxonomy
+		);
 		return $primary_term->get_primary_term();
 	}
 
@@ -129,13 +132,22 @@ class SPC_Admin {
 	 * @param WP_Taxonomy $taxonomy - Taxonomy object.
 	 */
 	public function save_primary_term( $post_id, $taxonomy ) {
-		$primary_term = isset( $_POST[ 'spc_primary_term_' . $taxonomy->name ] ) ? (int) sanitize_text_field( wp_unslash( $_POST[ 'spc_primary_term_' . $taxonomy->name ] ) ) : false;
+
+		$primary_term = false;
+		if ( isset( $_POST[ 'spc_primary_term_' . $taxonomy->name ] ) ) {
+			$primary_term = (int) sanitize_text_field(
+				wp_unslash( $_POST[ 'spc_primary_term_' . $taxonomy->name ] )
+			);
+		}
 
 		if ( ! $primary_term ) {
 			return;
 		}
 
-		check_admin_referer( 'spc-save-primary-term', 'spc_save_primary_' . $taxonomy->name . '_nonce' );
+		check_admin_referer(
+			'spc-save-primary-term',
+			'spc_save_primary_' . $taxonomy->name . '_nonce'
+		);
 
 		$spc_primary_term = new SPC_Primary_Term( $post_id, $taxonomy->name );
 		$spc_primary_term->save_primary_term( $primary_term );
@@ -163,6 +175,7 @@ class SPC_Admin {
 	 * @return array
 	 */
 	public function get_post_taxonomies( $post_id = 0 ) {
+
 		if ( ! $post_id ) {
 			$post_id = $this->get_current_post_id();
 		}
@@ -208,7 +221,10 @@ class SPC_Admin {
 			'title'    => $taxonomy->labels->singular_name,
 			'primary'  => $this->get_primary_term( $taxonomy->name ),
 			'restBase' => $taxonomy->rest_base,
-			'terms'    => array_map( array( $this, 'get_terms_for_js' ), get_terms( $taxonomy->name ) ),
+			'terms'    => array_map(
+				array( $this, 'get_terms_for_js' ),
+				get_terms( $taxonomy->name )
+			),
 		);
 	}
 
