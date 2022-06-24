@@ -13,7 +13,7 @@
 	},
 	"devDependencies": {
 		"@wordpress/eslint-plugin": "^10.0.0",
-		"@wordpress/scripts": "^20.0.1",
+		"@wordpress/scripts": "^23.3.0",
 		"autoprefixer": "^10.4.2",
 		"eslint": "^8.7.0",
 		"lodash-es": "^4.17.21",
