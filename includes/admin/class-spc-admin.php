@@ -36,6 +36,7 @@ class SPC_Admin {
 	 * @param string $hook_suffix - Page hook suffix.
 	 */
 	public function enqueue_script( $hook_suffix ) {
+
 		if ( ! $this->is_post_edit( $hook_suffix ) ) {
 			return;
 		}
@@ -48,20 +49,27 @@ class SPC_Admin {
 
 		// Get current screen to determine the script name to be enqueued.
 		$current_screen = get_current_screen();
-		$script_name    = 'spc-classic-editor';
+		$script_name    = 'spc-classic-editor.js';
+		$asset_file     = 'spc-classic-editor.asset.php';
 
-		if ( isset( $current_screen->is_block_editor ) && $current_screen->is_block_editor ) {
-			$script_name = 'spc-gutenberg';
+		if (
+			isset( $current_screen->is_block_editor )
+			&& $current_screen->is_block_editor
+		) {
+			$script_name = 'spc-gutenberg.js';
+			$asset_file  = 'spc-gutenberg.asset.php';
 		}
 
-		$suffix  = ( defined( 'WP_DEBUG' ) && WP_DEBUG ) ? '' : '.min';
-		$version = ( defined( 'WP_DEBUG' ) && WP_DEBUG ) ? filemtime( SPC_BASE_DIR . 'dist/' . $script_name . '.js' ) : SPC_VERSION;
+		$assets = require_once SPC_BASE_DIR . 'dist/' . $asset_file;
 
 		wp_register_script(
 			'spc-taxonomy',
-			SPC_BASE_URL . 'dist/' . $script_name . $suffix . '.js',
-			array( 'jquery' ),
-			$version,
+			SPC_BASE_URL . 'dist/' . $script_name,
+			array_merge(
+				$assets['dependencies'],
+				array( 'jquery' )
+			),
+			$assets['version'],
 			true
 		);
 		wp_enqueue_script( 'spc-taxonomy' );
@@ -70,7 +78,10 @@ class SPC_Admin {
 			'spc-taxonomy',
 			'spcData',
 			array(
-				'taxonomies' => array_map( array( $this, 'get_taxonomies_for_js' ), $post_taxonomies ),
+				'taxonomies' => array_map(
+					array( $this, 'get_taxonomies_for_js' ),
+					$post_taxonomies
+				),
 			)
 		);
 	}
@@ -107,7 +118,10 @@ class SPC_Admin {
 	 * @return integer
 	 */
 	public function get_primary_term( $taxonomy ) {
-		$primary_term = new SPC_Primary_Term( $this->get_current_post_id(), $taxonomy );
+		$primary_term = new SPC_Primary_Term(
+			$this->get_current_post_id(),
+			$taxonomy
+		);
 		return $primary_term->get_primary_term();
 	}
 
@@ -118,13 +132,22 @@ class SPC_Admin {
 	 * @param WP_Taxonomy $taxonomy - Taxonomy object.
 	 */
 	public function save_primary_term( $post_id, $taxonomy ) {
-		$primary_term = isset( $_POST[ 'spc_primary_term_' . $taxonomy->name ] ) ? (int) sanitize_text_field( wp_unslash( $_POST[ 'spc_primary_term_' . $taxonomy->name ] ) ) : false;
+
+		$primary_term = false;
+		if ( isset( $_POST[ 'spc_primary_term_' . $taxonomy->name ] ) ) {
+			$primary_term = (int) sanitize_text_field(
+				wp_unslash( $_POST[ 'spc_primary_term_' . $taxonomy->name ] )
+			);
+		}
 
 		if ( ! $primary_term ) {
 			return;
 		}
 
-		check_admin_referer( 'spc-save-primary-term', 'spc_save_primary_' . $taxonomy->name . '_nonce' );
+		check_admin_referer(
+			'spc-save-primary-term',
+			'spc_save_primary_' . $taxonomy->name . '_nonce'
+		);
 
 		$spc_primary_term = new SPC_Primary_Term( $post_id, $taxonomy->name );
 		$spc_primary_term->save_primary_term( $primary_term );
@@ -152,6 +175,7 @@ class SPC_Admin {
 	 * @return array
 	 */
 	public function get_post_taxonomies( $post_id = 0 ) {
+
 		if ( ! $post_id ) {
 			$post_id = $this->get_current_post_id();
 		}
@@ -197,7 +221,10 @@ class SPC_Admin {
 			'title'    => $taxonomy->labels->singular_name,
 			'primary'  => $this->get_primary_term( $taxonomy->name ),
 			'restBase' => $taxonomy->rest_base,
-			'terms'    => array_map( array( $this, 'get_terms_for_js' ), get_terms( $taxonomy->name ) ),
+			'terms'    => array_map(
+				array( $this, 'get_terms_for_js' ),
+				get_terms( $taxonomy->name )
+			),
 		);
 	}
 

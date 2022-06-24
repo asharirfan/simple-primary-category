@@ -4,6 +4,8 @@
 import { Component, Fragment } from '@wordpress/element';
 import SPCPicker from './SpcPicker';
 
+/* global spcData */
+
 /**
  * SPC Init Component
  */
@@ -14,46 +16,42 @@ class SPCInit extends Component {
 		this.state = {
 			hasError: false,
 			error: null,
-		}
+		};
 	}
 
 	/**
 	 * Handle the component errors.
 	 *
-	 * @param {object} error Error object.
+	 * @param {Object} error Error object.
 	 */
-	static getDerivedStateFromError( error ) {
+	static getDerivedStateFromError(error) {
 		return {
 			hasError: true,
-			error
+			error,
 		};
 	}
 
 	/**
 	 * Renders the SPCInit component.
 	 *
-	 * @returns {ReactElement}
+	 * @return {Element} Element to render.
 	 */
 	render() {
 		const { slug, TaxonomyComponent } = this.props;
 		const taxonomies = spcData.taxonomies;
 
-		if ( this.state.hasError ) {
-			return (
-				<TaxonomyComponent {...this.props} />
-			);
+		if (this.state.hasError) {
+			return <TaxonomyComponent {...this.props} />;
 		}
 
-		if ( ! taxonomies.hasOwnProperty( slug ) ) {
-			return (
-				<TaxonomyComponent {...this.props} />
-			);
+		if (!taxonomies.hasOwnProperty(slug)) {
+			return <TaxonomyComponent {...this.props} />;
 		}
 
 		return (
 			<Fragment>
 				<TaxonomyComponent {...this.props} />
-				<SPCPicker primaryTaxonomy={ taxonomies[slug] } />
+				<SPCPicker primaryTaxonomy={taxonomies[slug]} />
 			</Fragment>
 		);
 	}
