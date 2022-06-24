@@ -21,7 +21,7 @@ final class Simple_Primary_Category {
 	 *
 	 * @var string
 	 */
-	public $version = '1.0.0';
+	public $version = '1.1.0';
 
 	/**
 	 * Single Plugin Instance.
