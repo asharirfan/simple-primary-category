@@ -2,7 +2,7 @@
  * SPC Taxonomy Selection Script.
  */
 
-import { _ } from 'lodash';
+import { values } from 'lodash';
 
 /* global spcData, jQuery */
 
@@ -14,7 +14,7 @@ jQuery(document).ready(function () {
 	 * Go through each post taxonomy and add relevant
 	 * primary taxonomy selector and handlers to each box.
 	 */
-	jQuery(_.values(taxonomies)).each(function (index, taxonomy) {
+	jQuery(values(taxonomies)).each(function (index, taxonomy) {
 		const taxonomyMetabox = jQuery(`#taxonomy-${taxonomy.name}`);
 
 		const primaryTermInputHtml = spcPrimaryTermInput({
