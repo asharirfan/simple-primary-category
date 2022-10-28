@@ -92,21 +92,4 @@ final class Simple_Primary_Category {
 			require_once dirname( __FILE__ ) . '/admin/class-spc-admin.php';
 		}
 	}
-
-	/**
-	 * Error Logger
-	 *
-	 * Logs given input into debug.log file in debug mode.
-	 *
-	 * @param mixed $message - Error message.
-	 */
-	public function error_log( $message ) {
-		if ( WP_DEBUG === true ) {
-			if ( is_array( $message ) || is_object( $message ) ) {
-				error_log( print_r( $message, true ) );
-			} else {
-				error_log( $message );
-			}
-		}
-	}
 }
