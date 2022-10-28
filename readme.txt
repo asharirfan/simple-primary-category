@@ -4,7 +4,7 @@ Tags: category,primary,taxonomy
 Requires at least: 5.0
 Tested up to: 6.1
 Requires PHP: 7.3
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 License: GPL3+
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 

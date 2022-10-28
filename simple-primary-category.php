@@ -3,9 +3,9 @@
  * Plugin Name: Simple Primary Category
  * Plugin URI:  https://github.com/asharirfan/simple-primary-category
  * Description: A light-weight WordPress plugin to assign primary category to posts and custom post types.
- * Author:      mrasharirfan
+ * Author:      MrAsharIrfan
  * Author URI:  https://AsharIrfan.com/
- * Version:     1.1.0
+ * Version:     1.1.1
  * License:     GPL3+
  * License URI: https://www.gnu.org/licenses/gpl-3.0.txt
  *
