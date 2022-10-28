@@ -31,5 +31,14 @@ A light-weight WordPress plugin to assign primary category to posts and custom p
 2. Classic Editor
 
 == Changelog ==
+
+= Version 1.1.1
+* Bumped tested up to tag
+
+= Version 1.1.0
+* Added dependencies updates
+* Fixed bugs in classic editor
+* Updated code formatting
+
 = Version 1.0.0
 * Initial Release
