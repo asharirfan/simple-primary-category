@@ -61,7 +61,7 @@ class SPC_Primary_Term_Query {
 		);
 
 		$query_args               = wp_parse_args( $args, $query_defaults );
-		$query_args['meta_query'] = array( $meta_query );
+		$query_args['meta_query'] = array( $meta_query ); // @codingStandardsIgnoreLine WordPress.DB.SlowDBQuery.slow_db_query_meta_query
 		$query                    = new WP_Query( $query_args );
 
 		if ( $query->post_count > 0 ) {
@@ -88,7 +88,8 @@ class SPC_Primary_Term_Query {
 		if ( false === $term_id ) {
 			$term_id = term_exists( $term );
 			wp_cache_set(
-				'spc_term_exists_' . $term . '_' . $taxonomy, $term_id,
+				'spc_term_exists_' . $term . '_' . $taxonomy,
+				$term_id,
 				'spc'
 			);
 		}
